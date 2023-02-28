@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import { createClient } from 'contentful'
-import PostCard from '@/components/PostCard'
+import Link from 'next/link'
+import Nav from '@/components/Nav'
+import TimeBar from '@/components/TimeBar'
 
 export async function getStaticProps() {
   const client = createClient({
@@ -29,12 +31,33 @@ export default function Home({ photographyPosts }: any) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className="recipe-list">
+        <Nav />
+        <TimeBar />
+        <div className="title-list">
           {photographyPosts.map((post: any) => (
-            <PostCard key={post.sys.id} post={post}/>
+            <Link href={`/photographyPost/${post.fields.slug}`} key={post.fields.title}>
+              {post.fields.title}<br/>
+            </Link>
           ))}
         </div>
       </main>
+      <style jsx>
+        {
+          `
+            .title-list {
+              font-family: 'Antonio';
+              font-size: 6vw;
+              text-decoration: underline;
+              text-align: center;
+
+              a, a:visited {
+                  color: inherit; 
+                  text-decoration: none;
+              }
+            }
+          `
+        }
+      </style>
     </>
   )
 }
