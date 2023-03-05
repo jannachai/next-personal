@@ -71,12 +71,17 @@ export default function RecipeDetails({ post }: { post: PhotographyPost}) {
   console.log(content)
   return (
     <Layout>
-      <Image 
-        src={`https:${hero.fields.file.url}`}
-        width={hero.fields.file.details.image.width}
-        height={hero.fields.file.details.image.height}
-        alt={title}
-      />
+      <div className="hero-container">
+        <Image 
+          src={`https:${hero.fields.file.url}`}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  "
+          style={{objectFit: 'contain'}}
+        />
+      </div>
       <h2>{ title }</h2>
       <h5>{ subtitle }</h5>
       <div style={{ display: 'flex'}}>
@@ -87,6 +92,21 @@ export default function RecipeDetails({ post }: { post: PhotographyPost}) {
       <div>
         {documentToReactComponents(content)}
       </div>
+      <style jsx>
+        {`
+          .hero-container {
+            position: relative;
+            min-height: 800px;
+            max-width: 1200px
+          }
+
+          @media only screen and (max-width: 400px) {
+            .hero-container {
+              min-height: 260px;
+            }
+          }
+        `}
+      </style>
     </Layout>
   )
 }

@@ -1,7 +1,7 @@
 import Nav from "./Nav"
 import TimeBar from "./TimeBar"
 
-function Layout({ children }: any) {
+function Layout({ children }: {children: React.ReactNode}) {
   return (
     <main>
       <Nav />
@@ -15,6 +15,13 @@ function Layout({ children }: any) {
           width: 80%;
           height: 100%;
           margin: 0 auto;
+          max-width: 1200px;
+        }
+
+        @media only screen and (max-width: 400px) {
+          .page-content {
+            width: 100%;
+          }
         }
       `}
       </style>
