@@ -16,11 +16,13 @@ function Layout({ children }: {children: React.ReactNode}) {
           height: 100%;
           margin: 0 auto;
           max-width: 1200px;
+          margin-top: 30px;
         }
 
         @media only screen and (max-width: 400px) {
           .page-content {
             width: 100%;
+            margin-top: 0;
           }
         }
       `}
