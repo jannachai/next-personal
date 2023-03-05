@@ -1,9 +1,6 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import { createClient } from 'contentful'
 import Link from 'next/link'
-import Nav from '@/components/Nav'
-import TimeBar from '@/components/TimeBar'
 import Layout from '@/components/Layout'
 
 export async function getStaticProps() {
