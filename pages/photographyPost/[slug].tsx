@@ -69,7 +69,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
 
   return (
     <Layout>
-      <TitlePhoto title={title} url={hero.fields.file.url} />
+      <TitlePhoto title={title} url={hero.fields.file.url} subtitle={subtitle} location={location} />
       <div style={{ display: 'flex' }}>
         <div>{persons?.join(', ') ?? ''}</div>
         <div>{location}</div>

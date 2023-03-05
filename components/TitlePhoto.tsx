@@ -1,9 +1,15 @@
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-
 import { HiArrowNarrowDown } from 'react-icons/hi';
 
-function TitlePhoto({ title, url }: { title: string; url: string }) {
+interface ITitlePhoto {
+  title: string;
+  url: string;
+  subtitle: string;
+  location: string;
+}
+
+function TitlePhoto({ title, url, subtitle, location }: ITitlePhoto) {
   return (
     <div className="hero-container">
       <Image
@@ -17,8 +23,8 @@ function TitlePhoto({ title, url }: { title: string; url: string }) {
         quality={100}
         priority
       />
-      <div className='subtitle'>Te Motu | Waiheke</div>
-      <AnimatePresence >
+      <div className="subtitle">{subtitle ? subtitle : location.split(', ').join(' | ')}</div>
+      <AnimatePresence>
         <motion.div
           animate={{
             y: [40, 20, 40, 0, 40, 35, 40],
@@ -27,9 +33,9 @@ function TitlePhoto({ title, url }: { title: string; url: string }) {
             duration: 2,
             repeat: Infinity,
           }}
-          style={{position: 'absolute', bottom: '15%', margin: '0 auto'}}
+          style={{ position: 'absolute', bottom: '15%', margin: '0 auto' }}
         >
-          <HiArrowNarrowDown style={{ width: 25, height: 25 }}/>
+          <HiArrowNarrowDown style={{ width: 25, height: 25 }} />
         </motion.div>
       </AnimatePresence>
       <style jsx>
