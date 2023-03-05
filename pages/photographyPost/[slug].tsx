@@ -2,6 +2,7 @@ import { createClient } from 'contentful'
 import Image from 'next/image'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Document } from '@contentful/rich-text-types'
+import Layout from '@/components/Layout'
 
 interface PhotographyPost {
     fields: {
@@ -69,7 +70,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost}) {
   const { title, subtitle, hero, persons, location, date, content } = post.fields
   console.log(content)
   return (
-    <div>
+    <Layout>
       <Image 
         src={`https:${hero.fields.file.url}`}
         width={hero.fields.file.details.image.width}
@@ -86,6 +87,6 @@ export default function RecipeDetails({ post }: { post: PhotographyPost}) {
       <div>
         {documentToReactComponents(content)}
       </div>
-    </div>
+    </Layout>
   )
 }

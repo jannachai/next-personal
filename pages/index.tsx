@@ -4,6 +4,7 @@ import { createClient } from 'contentful'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import TimeBar from '@/components/TimeBar'
+import Layout from '@/components/Layout'
 
 export async function getStaticProps() {
   const client = createClient({
@@ -30,17 +31,15 @@ export default function Home({ photographyPosts }: any) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Nav />
-        <TimeBar />
-        <div className="title-list">
+      <Layout>
+        <div className='title-list'>
           {photographyPosts.map((post: any) => (
             <Link href={`/photographyPost/${post.fields.slug}`} key={post.fields.title}>
               {post.fields.title}<br/>
             </Link>
           ))}
         </div>
-      </main>
+      </Layout>
       <style jsx>
         {
           `
