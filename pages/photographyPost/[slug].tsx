@@ -4,6 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Document } from '@contentful/rich-text-types';
 import Layout from '@/components/Layout';
 import TitlePhoto from '@/components/TitlePhoto';
+import PostHeader from '@/components/PostHeader';
 
 interface PhotographyPost {
   fields: {
@@ -69,12 +70,13 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
 
   return (
     <Layout>
-      <TitlePhoto title={title} url={hero.fields.file.url} subtitle={subtitle} location={location} />
-      <div style={{ display: 'flex' }}>
-        <div>{persons?.join(', ') ?? ''}</div>
-        <div>{location}</div>
-        <div>{date}</div>
-      </div>
+      <TitlePhoto
+        title={title}
+        url={hero.fields.file.url}
+        subtitle={subtitle}
+        location={location}
+      />
+      <PostHeader persons={persons} location={location} date={date} />
       <div>{documentToReactComponents(content)}</div>
     </Layout>
   );
