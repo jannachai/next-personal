@@ -17,6 +17,7 @@ function Layout({ children }: {children: React.ReactNode}) {
           margin: 0 auto;
           max-width: 1200px;
           margin-top: 30px;
+          margin-bottom: 200px;
         }
 
         @media only screen and (max-width: 400px) {

@@ -1,10 +1,9 @@
 import { createClient } from 'contentful';
-import Image from 'next/image';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
 import Layout from '@/components/Layout';
 import TitlePhoto from '@/components/TitlePhoto';
 import PostHeader from '@/components/PostHeader';
+import { HeroTextContainer, TextContainer } from '@/components/TextContainers';
 
 interface PhotographyPost {
   fields: {
@@ -28,6 +27,7 @@ interface PhotographyPost {
     location: string;
     date: string;
     content: Document;
+    heroText: Document;
   };
 }
 
@@ -65,7 +65,7 @@ export async function getStaticProps({ params }: { params: any }) {
 }
 
 export default function RecipeDetails({ post }: { post: PhotographyPost }) {
-  const { title, subtitle, hero, persons, location, date, content } =
+  const { title, subtitle, hero, persons, location, date, content, heroText } =
     post.fields;
 
   return (
@@ -77,7 +77,8 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
         location={location}
       />
       <PostHeader persons={persons} location={location} date={date} />
-      <div>{documentToReactComponents(content)}</div>
+      <HeroTextContainer content={heroText} />
+      <TextContainer content={content} />
     </Layout>
   );
 }

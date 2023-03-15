@@ -28,7 +28,7 @@ export default function PostHeader({ persons, location, date }: IPostHeader) {
           .wrapper {
             display: flex;
             justify-content: space-evenly;
-            margin-bottom: 200px;
+            margin: 2rem 0 8rem 0;
           }
 
           .detail-container {
