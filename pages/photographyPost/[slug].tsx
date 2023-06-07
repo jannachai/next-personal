@@ -98,7 +98,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
       <HeroTextContainer content={heroText} />
       <TextContainer content={content} />
       <div>
-        {photos.map((photo) => (
+        {photos?.map((photo) => (
           <div key={photo.sys.id} className="landscape-container">
             <Image
               src={`https:${photo.fields.file.url}`}
@@ -121,7 +121,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
           maxWidth: 1200,
         }}
       >
-        {portraits.map((portrait) => (
+        {portraits?.map((portrait) => (
           <div key={portrait.sys.id} className="portrait-container">
             <Image
               src={`https:${portrait.fields.file.url}`}
