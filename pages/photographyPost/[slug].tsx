@@ -97,46 +97,80 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
       <PostHeader persons={persons} location={location} date={date} />
       <HeroTextContainer content={heroText} />
       <TextContainer content={content} />
-      <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          flexWrap: 'wrap'
-        }}
-      >
+      <div>
         {photos.map((photo) => (
-          <Image
-            key={photo.sys.id}
-            src={`https:${photo.fields.file.url}`}
-            alt={title}
-            width={1200}
-            height={800}
-            quality={100}
-            style={{ marginBottom: 250 }}
-          />
+          <div key={photo.sys.id} className="landscape-container">
+            <Image
+              src={`https:${photo.fields.file.url}`}
+              alt={title}
+              fill
+              quality={100}
+              style={{ objectFit: 'contain' }}
+              sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    "
+            />
+          </div>
         ))}
       </div>
       <div
         style={{
-          position: 'relative',
           display: 'flex',
-          justifyContent: 'space-between',
           flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          maxWidth: 1200,
         }}
       >
         {portraits.map((portrait) => (
-          <Image
-            key={portrait.sys.id}
-            src={`https:${portrait.fields.file.url}`}
-            alt={title}
-            width={590}
-            height={885}
-            quality={100}
-            style={{ marginBottom: 250}}
-          />
+          <div key={portrait.sys.id} className="portrait-container">
+            <Image
+              src={`https:${portrait.fields.file.url}`}
+              alt={title}
+              fill
+              quality={100}
+              style={{ objectFit: 'contain' }}
+              sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    "
+            />
+          </div>
         ))}
       </div>
+      <style jsx>
+        {`
+          .landscape-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            min-height: 800px;
+            margin-bottom: 250px;
+          }
+
+          @media only screen and (max-width: 400px) {
+            .landscape-container {
+              min-height: 240px;
+              margin: 5px 20px;
+            }
+          }
+
+          .portrait-container {
+            position: relative;
+            max-width: 590px;
+            min-height: 900px;
+            margin-bottom: 250px;
+            width: 100%;
+          }
+
+          @media only screen and (max-width: 400px) {
+            .portrait-container {
+              min-height: 480px;
+              margin: 10px 20px;
+            }
+          }
+        `}
+      </style>
     </Layout>
   );
 }
