@@ -4,30 +4,38 @@ import Layout from '@/components/Layout';
 import TitlePhoto from '@/components/TitlePhoto';
 import PostHeader from '@/components/PostHeader';
 import { HeroTextContainer, TextContainer } from '@/components/TextContainers';
+import Image from 'next/image';
+
+interface ContentfulImage {
+  fields: {
+    file: {
+      url: string;
+      details: {
+        image: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+  };
+  sys: {
+    id: string;
+  };
+}
 
 interface PhotographyPost {
   fields: {
     title: string;
     subtitle: string;
-    hero: {
-      fields: {
-        file: {
-          url: string;
-          details: {
-            image: {
-              width: number;
-              height: number;
-            };
-          };
-        };
-      };
-    };
+    hero: ContentfulImage;
     slug: string;
     persons: string[];
     location: string;
     date: string;
     content: Document;
     heroText: Document;
+    photos: ContentfulImage[];
+    portraits: ContentfulImage[];
   };
 }
 
@@ -65,8 +73,18 @@ export async function getStaticProps({ params }: { params: any }) {
 }
 
 export default function RecipeDetails({ post }: { post: PhotographyPost }) {
-  const { title, subtitle, hero, persons, location, date, content, heroText } =
-    post.fields;
+  const {
+    title,
+    subtitle,
+    hero,
+    persons,
+    location,
+    date,
+    content,
+    heroText,
+    portraits,
+    photos,
+  } = post.fields;
 
   return (
     <Layout>
@@ -79,6 +97,46 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
       <PostHeader persons={persons} location={location} date={date} />
       <HeroTextContainer content={heroText} />
       <TextContainer content={content} />
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          flexWrap: 'wrap'
+        }}
+      >
+        {photos.map((photo) => (
+          <Image
+            key={photo.sys.id}
+            src={`https:${photo.fields.file.url}`}
+            alt={title}
+            width={1200}
+            height={800}
+            quality={100}
+            style={{ marginBottom: 250 }}
+          />
+        ))}
+      </div>
+      <div
+        style={{
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        {portraits.map((portrait) => (
+          <Image
+            key={portrait.sys.id}
+            src={`https:${portrait.fields.file.url}`}
+            alt={title}
+            width={590}
+            height={885}
+            quality={100}
+            style={{ marginBottom: 250}}
+          />
+        ))}
+      </div>
     </Layout>
   );
 }
