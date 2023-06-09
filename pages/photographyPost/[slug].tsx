@@ -106,9 +106,6 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
               fill
               quality={100}
               style={{ objectFit: 'contain' }}
-              sizes="(max-width: 768px) 100vw,
-                    (max-width: 1200px) 50vw,
-                    "
             />
           </div>
         ))}
@@ -129,9 +126,6 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
               fill
               quality={100}
               style={{ objectFit: 'contain' }}
-              sizes="(max-width: 768px) 100vw,
-                    (max-width: 1200px) 50vw,
-                    "
             />
           </div>
         ))}
