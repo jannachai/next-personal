@@ -109,26 +109,19 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
             />
           </div>
         ))}
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          maxWidth: 1200,
-        }}
-      >
-        {portraits?.map((portrait) => (
-          <div key={portrait.sys.id} className="portrait-container">
-            <Image
-              src={`https:${portrait.fields.file.url}`}
-              alt={title}
-              fill
-              quality={100}
-              style={{ objectFit: 'contain' }}
-            />
-          </div>
-        ))}
+        <div className="portrait-wrapper">
+          {portraits?.map((portrait) => (
+            <div key={portrait.sys.id} className="portrait-container">
+              <Image
+                src={`https:${portrait.fields.file.url}`}
+                alt={title}
+                fill
+                quality={100}
+                style={{ objectFit: 'contain' }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <style jsx>
         {`
@@ -147,6 +140,13 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
               min-height: 240px;
               margin: 5px 20px;
             }
+          }
+
+          .portrait-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200;
           }
 
           .portrait-container {
