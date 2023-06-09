@@ -5,6 +5,8 @@ import TitlePhoto from '@/components/TitlePhoto';
 import PostHeader from '@/components/PostHeader';
 import { HeroTextContainer, TextContainer } from '@/components/TextContainers';
 import Image from 'next/image';
+import { FaFrog } from 'react-icons/fa';
+import { useState } from 'react';
 
 interface ContentfulImage {
   fields: {
@@ -86,6 +88,8 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
     photos,
   } = post.fields;
 
+  const [isSnapTo, setIsSnapTo] = useState(false);
+
   return (
     <Layout>
       <TitlePhoto
@@ -97,7 +101,8 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
       <PostHeader persons={persons} location={location} date={date} />
       <HeroTextContainer content={heroText} />
       <TextContainer content={content} />
-      <div>
+      <FaFrog style={{ width: 45, height: 25 }} onClick={() => setIsSnapTo(!isSnapTo)}/>
+      <div className={isSnapTo ? "wrapper" : ""}>
         {photos?.map((photo) => (
           <div key={photo.sys.id} className="landscape-container">
             <Image
@@ -125,6 +130,17 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
       </div>
       <style jsx>
         {`
+          .wrapper {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behaviour: smooth;
+            height: 100vh;
+          }
+
+          .wrapper::-webkit-scrollbar {
+            display: none;
+          }
+
           .landscape-container {
             position: relative;
             display: flex;
@@ -133,6 +149,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
             max-width: 1200px;
             min-height: 800px;
             margin-bottom: 250px;
+            scroll-snap-align: center;
           }
 
           @media only screen and (max-width: 400px) {
@@ -155,6 +172,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
             min-height: 900px;
             margin-bottom: 250px;
             width: 100%;
+            scroll-snap-align: center;
           }
 
           @media only screen and (max-width: 400px) {
