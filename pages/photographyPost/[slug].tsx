@@ -277,6 +277,7 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
 
             .portrait-description {
               padding: 0 20px;
+              margin-top: 5px;
             }
 
             .portrait-container {

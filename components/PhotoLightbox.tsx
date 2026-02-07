@@ -87,6 +87,7 @@ export default function PhotoLightbox({ children, images }: PhotoLightboxProps) 
                       fontSize: '14px',
                       maxWidth: '90%',
                       padding: '0 20px',
+                      fontFamily: 'Raleway, sans-serif',
                     }}
                   >
                     {currentImage.description}
