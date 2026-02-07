@@ -260,7 +260,6 @@ export default function RecipeDetails({ post }: { post: PhotographyPost }) {
             text-align: center;
             font-size: 14px;
             color: #666;
-            margin-top: -15px;
             padding: 0 20px;
             font-family: Raleway, sans-serif;
           }
